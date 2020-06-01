@@ -105,53 +105,54 @@
             height: 100vh;
             color: #fff;
             background: #333744;
-            width: 225px;
-            overflow-y: scroll
+            width: 200px;
+            overflow-y: scroll;
         }
 
         .chat__main {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            max-height: 100vh
+            max-height: 100vh;
         }
 
         .chat__messages {
             flex-grow: 1;
             padding: 24px 24px 0;
-            overflow-y: scroll
+            overflow-y: scroll;
         }
 
         .message {
-            margin-bottom: 16px
+            margin-bottom: 16px;
+            
         }
 
         .message__name {
             font-weight: 600;
             font-size: 14px;
-            margin-right: 8px
+            margin-right: 8px;
         }
 
         .message__meta {
             color: #777;
-            font-size: 14px
+            font-size: 14px;
         }
 
         .message a {
-            color: #0070CC
+            color: #0070CC;
         }
 
         .compose {
             display: flex;
             flex-shrink: 0;
             margin-top: 16px;
-            padding: 24px
+            padding: 24px;
         }
 
         .compose form {
             display: flex;
             flex-grow: 1;
-            margin-right: 16px
+            margin-right: 16px;
         }
 
         .compose input {
@@ -159,34 +160,39 @@
             width: 100%;
             padding: 12px;
             margin: 0 16px 0 0;
-            flex-grow: 1
+            flex-grow: 1;
         }
 
         .compose button {
-            font-size: 14px
+            font-size: 14px;
         }
 
         .room-title {
             font-weight: 400;
             font-size: 22px;
             background: #2c2f3a;
-            padding: 24px
+            padding: 24px;
         }
 
         .list-title {
             font-weight: 500;
             font-size: 18px;
             margin-bottom: 4px;
-            padding: 12px 24px 0
+            padding: 12px 24px 0;
         }
 
         .users {
             list-style-type: none;
             font-weight: 300;
-            padding: 12px 24px 0
+            padding: 12px 24px 0;
         }
-    </style>
-
+      
+      @media only screen and (max-width: 600px) {
+ form{
+      flex-direction: column;
+  }
+}
+  </style>
 
     <div class="chat">
         <div id="sidebar" class="chat__sidebar">
