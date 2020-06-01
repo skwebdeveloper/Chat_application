@@ -1,0 +1,8 @@
+// socket.on('updateCount', (count) => {
+//     console.log("Updated account", count);
+// });
+
+
+// document.querySelector('#increment').addEventListener('click', () =>{
+//  socket.emit('increment');
+// });
