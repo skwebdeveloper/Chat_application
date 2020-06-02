@@ -1,4 +1,3 @@
-<style>
 * {
     margin: 0;
     padding: 0;
@@ -178,5 +177,5 @@ button:disabled {
 @media only screen and (max-width: 600px) {
 form{
 flex-direction: column;
-}
+ }
 }
