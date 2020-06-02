@@ -6,12 +6,14 @@ const { generateMessage, generateLocationMessage } = require('./utils/messages')
 const { addUser, getUser, getUsersInRoom, removeUser } = require('./utils/users');
 const app = express();
 
+// Because we are using http and request at the same time so we need to use it
 const server = http.createServer(app);
 const io = socketio(server);
 
 const port = process.env.PORT || 3000;
-const publicdirectoryPath = path.join(__dirname, '../public');
 
+// This is for HTML files 
+const publicdirectoryPath = path.join(__dirname, '../public');
 app.use(express.static(publicdirectoryPath));
 
 app.get('/', (req, res, next) => {

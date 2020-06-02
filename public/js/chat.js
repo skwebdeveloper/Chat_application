@@ -1,4 +1,5 @@
 const socket = io();
+// Taking this from chat.js via MESSAGE Id of FORM
 const mainform = document.querySelector('#message');
 const inputform = mainform.querySelector('input');
 const formbutton = mainform.querySelector('#increment');
@@ -12,28 +13,28 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 // QS
 // ignoreQueryPrefix is used to remove ? 
-const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
-const autoscroll = () =>{
+const autoscroll = () => {
     // lastElementChild is for last message 
-     const newmessage = messages.lastElementChild
+    const newmessage = messages.lastElementChild
     //  Heigth of new messages 
     const newmessageStyle = getComputedStyle(newmessage);
     const newmessageMargin = parseInt(newmessageStyle.marginBottom);
     const newmessageHeight = newmessage.offsetHeight + newmessageMargin
-    
+
     const visibleHeight = messages.offsetHeight;
 
     const containerHeight = messages.scrollHeight;
 
     const scrollOffSet = messages.scrollTop + visibleHeight;
 
-if(containerHeight - newmessageHeight <= scrollOffSet){
-    messages.scrollTop = messages.scrollHeight
-  }
+    if (containerHeight - newmessageHeight <= scrollOffSet) {
+        messages.scrollTop = messages.scrollHeight
+    }
 }
 
-
+// Normal message 
 socket.on('message', (message) => {
     console.log(message);
     const html = Mustache.render(messageTemplate, {
@@ -45,7 +46,7 @@ socket.on('message', (message) => {
     autoscroll();
 });
 
-
+// This is for Location message 
 socket.on('locationmessage', (message) => {
     console.log(message);
     const html = Mustache.render(locationtemplate, {
@@ -54,25 +55,26 @@ socket.on('locationmessage', (message) => {
         createdAt: moment(message.createdAt).format('h:mm:ss a')
     });
     messages.insertAdjacentHTML('beforeend', html);
-     autoscroll();
+    autoscroll();
 });
 
+// This is for room data 
 socket.on('roomdata', ({ room, users }) => {
-  const html = Mustache.render(sidebarTemplate, {
-     room,
-     users
-  });
-  document.querySelector('#sidebar').innerHTML = html
+    const html = Mustache.render(sidebarTemplate, {
+        room,
+        users
+    });
+    document.querySelector('#sidebar').innerHTML = html
 })
 
 
 mainform.addEventListener('submit', (e) => {
-// This is used to prevent refresh
+    // This is used to prevent refresh
     e.preventDefault();
     formbutton.setAttribute('disabled', 'disabled');
     const mess = document.querySelector('input').value;
     socket.emit('sendmessage', mess, (message) => {
-// This is for input, so that everytime we refresh we got blank input
+        // This is for input, so that everytime we refresh we got blank input
         formbutton.removeAttribute('disabled');
         inputform.value = '';
         inputform.focus();
@@ -86,6 +88,7 @@ locationbutton.addEventListener('click', () => {
     if (!navigator.geolocation) {
         return alert("Geolocation not supported on your browser");
     }
+    // Once you click it become disabled so that request is working 
     locationbutton.setAttribute('disabled', 'disabled');
     navigator.geolocation.getCurrentPosition((position) => {
         socket.emit('sendLocation', {
@@ -93,15 +96,17 @@ locationbutton.addEventListener('click', () => {
             longitude: position.coords.longitude
         }, () => {
             console.log('Location shared');
+            // Now when it appers on your screen now it become abled 
             locationbutton.removeAttribute('disabled');
         });
     });
 });
 
 
-socket.emit('join', {username, room}, (error) =>{
-    if(error){
+socket.emit('join', { username, room }, (error) => {
+    if (error) {
         alert(error)
+        // If your username is already in use so I can redirect you to main page 
         location.href = '/'
     }
 });
