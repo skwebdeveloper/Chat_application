@@ -217,6 +217,7 @@ button:disabled {
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0;
+    color: white;
 }
 
 @media only screen and (max-width: 600px) {
