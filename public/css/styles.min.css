@@ -15,6 +15,7 @@
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  overflow-y: scroll;
 }
 
 .sidenav a {
@@ -177,7 +178,8 @@ button:disabled {
 .compose {
     display: flex;
     flex-shrink: 0;
-    margin-top: 16px;
+    /* margin-top: 16px;  */
+    margin-bottom: 0;
     padding: 24px;
 }
 
