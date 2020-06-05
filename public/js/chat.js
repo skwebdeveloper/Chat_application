@@ -64,7 +64,8 @@ socket.on('roomdata', ({ room, users }) => {
         room,
         users
     });
-    document.querySelector('#sidebar').innerHTML = html
+    // sidebar
+    document.querySelector('#mySidenav').innerHTML = html
 })
 
 
